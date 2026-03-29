@@ -369,9 +369,9 @@
         .dress-section {
             margin: 8px 24px;
             padding: 12px 16px;
-            border: 1px solid rgba(192,192,192,0.3);
+            border: 1px solid rgba(192,192,192,0.25);
             border-radius: 16px;
-            background: rgba(255,255,255,0.03);
+            background: rgba(2,10,30,0.4);
             box-shadow: 0 0 20px rgba(192,192,192,0.05);
         }
         .dress-icons { font-size: 30px; margin-bottom: 4px; }
@@ -380,6 +380,7 @@
             font-size: 28px;
             color: #C0C0C0;
             margin-bottom: 2px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 1);
         }
         .dress-tag {
             font-family: 'Cinzel', serif;
@@ -387,10 +388,11 @@
             letter-spacing: 4px;
             color: #87CEEB;
             text-transform: uppercase;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 1);
         }
 
         /* ── Asistencia ── */
-        .attendance-section { margin: 6px 16px; padding: 10px 20px; background: rgba(2,10,30,0.4); border-radius: 12px; }
+        .attendance-section { margin: 6px 16px; padding: 10px 20px; background: rgba(2,10,30,0.25); border-radius: 12px; }
         .attendance-cursive {
             font-family: 'Great Vibes', cursive;
             font-size: 30px;
@@ -406,6 +408,50 @@
             line-height: 1.6;
             margin-bottom: 4px;
             text-shadow: 0 2px 6px rgba(0,0,0,1);
+        }
+
+        /* ── Dress Note ── */
+        .dress-note {
+            font-size: 12px;
+            color: #b8d4f0;
+            line-height: 1.7;
+            margin-top: 6px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.95);
+        }
+        .dress-icons-svg {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 24px;
+            margin: 10px 0 6px;
+        }
+
+        /* ── Lluvia de sobres ── */
+        .sobres-section {
+            margin: 8px 16px;
+            padding: 14px 20px;
+            border: 1px solid rgba(192,192,192,0.25);
+            border-radius: 16px;
+            background: rgba(2,10,30,0.4);
+            box-shadow: 0 0 20px rgba(192,192,192,0.05);
+        }
+        .sobres-text {
+            font-size: 12.5px;
+            color: #b8d4f0;
+            line-height: 1.75;
+            margin-bottom: 12px;
+            font-style: italic;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.95);
+            padding: 0 4px;
+        }
+        .sobres-icon { margin: 6px 0 8px; }
+        .sobres-title {
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            letter-spacing: 4px;
+            color: #87CEEB;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0,0,0,1);
         }
 
         /* ── Pie ── */
@@ -461,6 +507,12 @@
             .attendance-note    { font-size: 10px; letter-spacing: 1px; }
 
             .footer { font-size: 11px; padding: 8px 14px 0; }
+
+            .dress-note { font-size: 11px; }
+            .dress-icons-svg { gap: 16px; }
+            .sobres-section { margin: 6px 10px; padding: 10px 14px; }
+            .sobres-text { font-size: 11.5px; }
+            .sobres-title { font-size: 12px; letter-spacing: 3px; }
         }
     </style>
 </head>
@@ -560,6 +612,64 @@
             </svg>
             Click Aquí
         </a>
+    </div>
+
+    <div class="diamond-sep">◆</div>
+
+    <!-- ══ DRESS CODE ══ -->
+    <div class="dress-section">
+        <div class="dress-cursive">Dress Code</div>
+        <div class="dress-icons-svg">
+            <!-- Corbata / Terno -->
+            <svg viewBox="0 0 60 90" width="38" height="58" fill="#87CEEB" style="opacity:0.9;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.8))">
+                <!-- Collar izquierdo -->
+                <path d="M4,2 L30,20 L4,28 Z"/>
+                <!-- Collar derecho -->
+                <path d="M56,2 L30,20 L56,28 Z"/>
+                <!-- Nudo -->
+                <path d="M22,16 L30,11 L38,16 L36,26 L24,26 Z"/>
+                <!-- Cuerpo de la corbata -->
+                <path d="M24,26 L20,62 L30,78 L40,62 L36,26 Z"/>
+            </svg>
+            <!-- Vestido de quinceañera -->
+            <svg viewBox="0 0 80 110" width="46" height="64" fill="#87CEEB" style="opacity:0.9;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.8))">
+                <!-- Tirante izquierdo -->
+                <path d="M24,0 L20,0 L17,18 L26,18 Z"/>
+                <!-- Tirante derecho -->
+                <path d="M56,0 L60,0 L63,18 L54,18 Z"/>
+                <!-- Cuerpo/Bodice -->
+                <path d="M17,18 L63,18 L58,42 L22,42 Z"/>
+                <!-- Cintura -->
+                <path d="M20,40 L60,40 L58,46 L22,46 Z"/>
+                <!-- Falda esponjada -->
+                <path d="M22,44 L58,44 C64,56 74,74 76,110 L4,110 C6,74 16,56 22,44 Z"/>
+            </svg>
+        </div>
+        <div class="dress-tag">Sport Elegante</div>
+        <p class="dress-note">
+            Amablemente, el color verde<br>únicamente para la quinceañera.
+        </p>
+    </div>
+
+    <div class="diamond-sep">◆</div>
+
+    <!-- ══ LLUVIA DE SOBRES ══ -->
+    <div class="sobres-section">
+        <p class="sobres-text">
+            Tu presencia en este día tan especial es el mejor regalo,<br>
+            pero si deseas obsequiarme un detalle, una contribución en<br>
+            efectivo será recibida con mucho cariño y gratitud.
+        </p>
+        <div class="sobres-icon">
+            <!-- Sobre / Envelope -->
+            <svg viewBox="0 0 80 58" width="66" height="48" style="filter:drop-shadow(0 2px 8px rgba(0,0,0,0.8))">
+                <rect x="2" y="2" width="76" height="54" rx="6" fill="rgba(135,206,235,0.18)" stroke="#87CEEB" stroke-width="2.5"/>
+                <path d="M2,8 L40,34 L78,8" fill="none" stroke="#87CEEB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2,56 L26,32" fill="none" stroke="rgba(135,206,235,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M78,56 L54,32" fill="none" stroke="rgba(135,206,235,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="sobres-title">Lluvia de Sobres</div>
     </div>
 
     <!-- ══ PIE ══ -->
