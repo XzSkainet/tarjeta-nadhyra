@@ -58,7 +58,27 @@
         }
 
         /* Todo el contenido de texto por encima de las partículas */
-        .card > *:not(.sparkles) { position: relative; z-index: 1; }
+        .card > *:not(.sparkles):not(.card-particles) { position: relative; z-index: 1; }
+
+        /* ── Partículas dentro de la tarjeta (caen de arriba a abajo) ── */
+        .card-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .card-particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: cardParticleFall linear infinite;
+        }
+        @keyframes cardParticleFall {
+            0%   { transform: translateY(-8px) scale(0);   opacity: 0; }
+            8%   { opacity: 1; }
+            92%  { opacity: 0.85; }
+            100% { transform: translateY(1100px) scale(1.2); opacity: 0; }
+        }
 
         /* ── Borde lateral decorativo ── */
         .card::before, .card::after {
@@ -522,6 +542,8 @@
 
 <div class="card">
 
+    <div class="card-particles" id="card-particles"></div>
+
     <!-- ══ CABECERA FLORAL ══ -->
     <div class="floral-header">
         <div class="header-text">
@@ -645,9 +667,9 @@
                 <path d="M22,44 L58,44 C64,56 74,74 76,110 L4,110 C6,74 16,56 22,44 Z"/>
             </svg>
         </div>
-        <div class="dress-tag">Sport Elegante</div>
+        <div class="dress-tag">Elegante</div>
         <p class="dress-note">
-            Amablemente, el color verde<br>únicamente para la quinceañera.
+            Amablemente, el color azul y plateado<br>únicamente para la quinceañera.
         </p>
     </div>
 
@@ -681,6 +703,30 @@
 </div>
 
 <script>
+    /* ── Partículas dentro de la tarjeta ── */
+    const cardPContainer = document.getElementById('card-particles');
+    const cardColors = ['#C0C0C0', '#87CEEB', '#b8d4f0', '#ffffff', '#e8f4ff', '#6495ED'];
+    for (let i = 0; i < 38; i++) {
+        const p = document.createElement('div');
+        p.classList.add('card-particle');
+        const size = Math.random() * 7 + 4;
+        const col = cardColors[Math.floor(Math.random() * cardColors.length)];
+        p.style.cssText = `
+            left:${Math.random()*100}%;
+            width:${size}px;
+            height:${size}px;
+            background:${col};
+            box-shadow:
+                0 0 ${size * 2}px ${col},
+                0 0 ${size * 5}px ${col},
+                0 0 ${size * 10}px rgba(255,255,255,0.6),
+                0 0 ${size * 16}px rgba(135,206,235,0.35);
+            animation-duration:${Math.random()*14+9}s;
+            animation-delay:${Math.random()*14}s;
+        `;
+        cardPContainer.appendChild(p);
+    }
+
     /* ── Partículas de fondo ── */
     const container = document.getElementById('sparkles');
     const colors = ['#C0C0C0', '#87CEEB', '#b8d4f0', '#ffffff', '#6495ED'];
