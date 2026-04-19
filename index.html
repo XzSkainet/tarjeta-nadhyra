@@ -29,12 +29,16 @@
             pointer-events: none;
             z-index: 0;
             overflow: hidden;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
         .sparkle {
             position: absolute;
             border-radius: 50%;
             opacity: 0;
             animation: sparkleFloat linear infinite;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
         }
         @keyframes sparkleFloat {
             0%   { transform: translateY(105vh) scale(0); opacity: 0; }
@@ -66,12 +70,16 @@
             inset: 0;
             pointer-events: none;
             z-index: 0;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
         .card-particle {
             position: absolute;
             border-radius: 50%;
             opacity: 0;
             animation: cardParticleFall linear infinite;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
         }
         @keyframes cardParticleFall {
             0%   { transform: translateY(-8px) scale(0);   opacity: 0; }
@@ -488,6 +496,11 @@
         @media (max-width: 500px) {
             body { padding: 0; align-items: flex-start; }
 
+            /* Simplificar sombras de partículas en mobile para evitar parpadeo */
+            .card-particle, .sparkle {
+                box-shadow: none !important;
+            }
+
             .card { min-height: 100vh; }
 
             .floral-header { height: 110px; }
@@ -703,24 +716,27 @@
 </div>
 
 <script>
+    /* ── Detección mobile para reducir carga ── */
+    const isMobile = window.matchMedia('(max-width: 500px)').matches;
+
     /* ── Partículas dentro de la tarjeta ── */
     const cardPContainer = document.getElementById('card-particles');
     const cardColors = ['#C0C0C0', '#87CEEB', '#b8d4f0', '#ffffff', '#e8f4ff', '#6495ED'];
-    for (let i = 0; i < 38; i++) {
+    const cardCount = isMobile ? 18 : 38;
+    for (let i = 0; i < cardCount; i++) {
         const p = document.createElement('div');
         p.classList.add('card-particle');
         const size = Math.random() * 7 + 4;
         const col = cardColors[Math.floor(Math.random() * cardColors.length)];
+        const shadow = isMobile
+            ? `0 0 ${size * 2}px ${col}`
+            : `0 0 ${size * 2}px ${col}, 0 0 ${size * 5}px ${col}, 0 0 ${size * 10}px rgba(255,255,255,0.6), 0 0 ${size * 16}px rgba(135,206,235,0.35)`;
         p.style.cssText = `
             left:${Math.random()*100}%;
             width:${size}px;
             height:${size}px;
             background:${col};
-            box-shadow:
-                0 0 ${size * 2}px ${col},
-                0 0 ${size * 5}px ${col},
-                0 0 ${size * 10}px rgba(255,255,255,0.6),
-                0 0 ${size * 16}px rgba(135,206,235,0.35);
+            box-shadow:${shadow};
             animation-duration:${Math.random()*14+9}s;
             animation-delay:${Math.random()*14}s;
         `;
@@ -730,7 +746,8 @@
     /* ── Partículas de fondo ── */
     const container = document.getElementById('sparkles');
     const colors = ['#C0C0C0', '#87CEEB', '#b8d4f0', '#ffffff', '#6495ED'];
-    for (let i = 0; i < 50; i++) {
+    const sparkleCount = isMobile ? 22 : 50;
+    for (let i = 0; i < sparkleCount; i++) {
         const s = document.createElement('div');
         s.classList.add('sparkle');
         const size = Math.random() * 5 + 2;
